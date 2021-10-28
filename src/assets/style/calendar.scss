@@ -1,0 +1,252 @@
+/* calendar */
+.wrap-calendar {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  .area-calendar,
+  .calendar,
+  .calendar tbody {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .banner-top {
+    padding: 40px 30px;
+    background-color: lavender;
+    h2 {
+      margin-bottom: 10px;
+    }  
+    li+li {
+      margin-top: 5px;
+    }
+  }
+  header {
+    display: flex;
+    padding: 20px 50px;
+    border-bottom: 1px solid #dcdadf;
+    .sorting {
+      margin-left: auto;
+    }
+    .area-arrow {
+      margin: 0 30px;
+      button {
+        overflow: hidden;
+        position: relative;
+        width: 15px;
+        height: 100%;
+        text-indent: -999em;
+        &:before,
+        &:after {
+          display: block;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 15px;
+          height: 2px;
+          margin: auto 0;
+          background-color: #ccc;
+          transform-origin: right;
+          content: '';
+        }
+        &:before {
+          transform: rotate(45deg);
+        }        
+        &:after {
+          transform: rotate(-45deg);
+        }        
+        &.prev {
+          transform: rotate(180deg);
+          transform-origin: center;
+        }        
+        &.next {
+          margin-left: 15px;
+        }
+      }    
+    }
+  }
+}
+
+
+h1 {
+  font-weight: normal;
+  font-size: 22px;
+  color: #666;
+}
+
+table.calendar {
+  width: 100%;
+  height: 100%;
+  caption {
+    position: absolute;
+    left: -999em;
+    width: 1px;
+    height: 1px;
+    text-indent: -999em;
+  }  
+  tr {
+    display: flex;
+    flex: 1;
+    > * {
+      width: 14.3%;
+      & + * {
+        border-left: 1px solid $light-gray;
+      }
+    }
+  }
+  thead tr th {
+    padding-top: 5px;
+    font-weight: normal;
+    font-size: 0.85em;
+    color: $gray;
+  }
+  
+  tbody tr {
+    border-bottom: 1px solid $light-gray;
+    td {
+      position: relative;
+      text-align: center;
+      .date {        
+        padding: 3px;
+        line-height: 1;
+        border-radius: 50%;
+      }
+      &.today .date {        
+        background-color: $point-color;
+        color: #fff;
+      }
+      button.bar-schedule {
+        display: block;
+        position: relative;
+        z-index: 1;
+        margin-top: 3em;
+        box-sizing: content-box;
+        padding: 2px 0 4px;
+        background-color: darkseagreen;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 0.85em;
+        transition: padding 0.2s, margin 0.2s;
+        &:hover {
+          margin-left: -6px;
+          padding-left: 6px;
+          padding-right: 6px;
+        }
+      }    
+      button.add-schedule {
+        display: inline-flex;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        transition: box-shadow 0.2s;
+        .button-text {
+          display: block;
+          position: absolute;
+          bottom: 0px;
+          width: 100%;
+          font-size: 12px;
+          color: $point-color;
+          letter-spacing: 0.05em;
+          opacity: 0;
+          transition: 0.2s;
+        }
+        &:hover {
+          box-shadow: 0 0 30px $light-gray;
+          .button-text {
+            bottom: 10px;
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/* calendar layerpopup */
+.layerPopup {
+  top: -50%;
+  right: 100%;
+  width: 300px;
+  margin-right: 10px;
+  h2.tit-popup {
+    font-size: 12px;
+  }
+  .tit-sch,
+  .tit-sch button {
+    font-size: 1.2em;
+  }
+  .period button {
+    font-size: 0.9em;
+    color: $dark-gray;
+  }
+  .desc {
+    margin-top: 10px;
+  }
+  .content {
+    margin: 0 -10px;
+    button,
+    input {
+      transition: 0.3s;
+      cursor: pointer;
+      &:hover {
+        background-color: $light-gray;
+      }
+    }
+  }
+  .bottom {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+  button.save-schedule {
+    color: $point-color;
+    &:hover {
+      background-color: $point-color;
+      color: #fff;
+    }
+  }
+  
+}
+
+
+/* layerpopup common */
+.layerPopup {
+  position: absolute;
+  z-index: 999;
+  padding: 25px;
+  background-color: #fff;
+  border: 1px solid $light-gray;
+  text-align: left;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.layerPopup button.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.layerPopup button.close:hover {
+  transform: rotate(90deg);
+}
+
+.layerPopup button.close:active {
+  outline: none;
+}
+
+.layerPopup button.close:active {
+  transform: rotate(90deg) scale(0.8)
+}
+
+/* position: fixed; top: 50%; left: 50%; z-index: 999; 
+transform: translate(-50%, -50%);  */
